@@ -124,6 +124,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
 
+        new_instance = HBNBCommand.classes[class_name]()
         data_kwargs = {}
         params = args.split()[1:]
 
@@ -141,7 +142,6 @@ class HBNBCommand(cmd.Cmd):
                     continue
             data_kwargs[key] = value
 
-        new_instance = HBNBCommand.classes[class_name]()
         new_instance.__dict__.update(data_kwargs)
         new_instance.save()
         print(new_instance.id)
