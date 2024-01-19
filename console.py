@@ -134,10 +134,10 @@ class HBNBCommand(cmd.Cmd):
                     value = value[1:-1]
                     value = value.replace('"', '\\\"').replace("_", " ")
                 elif "." in value:
-                    val = float(value)
+                    value = float(value)
                 else:
                     try:
-                        val = int(value)
+                        value = int(value)
                     except Exception as e:
                         continue
                 setattr(new_instance, key, value)
