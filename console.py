@@ -128,18 +128,19 @@ class HBNBCommand(cmd.Cmd):
         params = args.split()[1:]
 
         for param in params:
-            key, value = param.split("=")
-            if value.startswith('"') and value.endswith('"'):
-                value = value[1:-1]
-                value = value.replace('"', '\\\"').replace("_", " ")
-            elif "." in value:
-                val = float(value)
-            else:
-                try:
-                    val = int(value)
-                except Exception as e:
-                    continue
-            setattr(new_instance, key, value)
+            if "=" in param:
+                key, val = param.split("=")
+                if value.startswith('"') and value.endswith('"'):
+                    value = value[1:-1]
+                    value = value.replace('"', '\\\"').replace("_", " ")
+                elif "." in value:
+                    val = float(value)
+                else:
+                    try:
+                        val = int(value)
+                    except Exception as e:
+                        continue
+                setattr(new_instance, key, value)
 
         new_instance.save()
         print(new_instance.id)
