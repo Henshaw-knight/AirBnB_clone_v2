@@ -129,7 +129,7 @@ class HBNBCommand(cmd.Cmd):
 
         for param in params:
             if "=" in param:
-                key, val = param.split("=")
+                key, value = param.split("=")
                 if value.startswith('"') and value.endswith('"'):
                     value = value[1:-1]
                     value = value.replace('"', '\\\"').replace("_", " ")
