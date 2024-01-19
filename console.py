@@ -125,7 +125,6 @@ class HBNBCommand(cmd.Cmd):
             return
 
         new_instance = HBNBCommand.classes[class_name]()
-        data_kwargs = {}
         params = args.split()[1:]
 
         for param in params:
@@ -140,9 +139,8 @@ class HBNBCommand(cmd.Cmd):
                     val = int(value)
                 except Exception as e:
                     continue
-            data_kwargs[key] = value
+            setattr(new_instance, key, value)
 
-        new_instance.__dict__.update(data_kwargs)
         new_instance.save()
         print(new_instance.id)
 
