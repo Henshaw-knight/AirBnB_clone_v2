@@ -28,4 +28,4 @@ class State(BaseModel, Base):
             for city in retrieved_cities:
                 if city.state_id == self.id:
                     list_of_cities.append(city)
-                return list_of_cities
+            return list_of_cities
