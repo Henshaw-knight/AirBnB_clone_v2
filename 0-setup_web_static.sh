@@ -2,15 +2,15 @@
 # Bash script that sets up the web servers for the deployment of web_static
 
 # install Nginx if not already installed
-if ! command -v nginx &> /dev/null; then
+# if ! command -v nginx &> /dev/null; then
 sudo apt-get -y update
 sudo apt-get -y install nginx
-fi
+# fi
 
 
 # Create necessary folders
 sudo mkdir -p /data/web_static/releases/test
-sudo mkdir -p /datat/web_static/shared
+sudo mkdir -p /data/web_static/shared
 
 # Create HTML file with simple content
 echo "<!DOCTYPE html>
