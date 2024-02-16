@@ -13,27 +13,24 @@ def do_deploy(archive_path):
     if not os.path.exists(archive_path):
         return False
 
-    archive_name = archive_path.split("/")[-1]
-    archive_name_with_no_ext = archive_name.split(".")[0]
-    path = f"/data/web_static/releases/{archive_name_with_no_ext}/"
+    try:
+        archive_name = archive_path.split("/")[-1]
+        archive_name_with_no_ext = archive_name.split(".")[0]
+        path = f"/data/web_static/releases/{archive_name_with_no_ext}/"
 
-    # upload archive to the /tmp/ directory of the web server
-    upload = put(archive_path, "/tmp/")
+        # upload archive to the /tmp/ directory of the web server
+        put(archive_path, "/tmp/")
 
-    run(f"sudo mkdir -p {path}")
-    uncompress = run(f"sudo tar -xzvf /tmp/{archive_name} -C {path}")
-    archive_deletion = run(f"sudo rm /tmp/{archive_name}")
-    run(f"sudo mv {path}/web_static/* {path}")
-    run(f"sudo rm -rf {path}/web_static")
-    symlink_deletion = run("sudo rm -rf /data/web_static/current")
+        run(f"sudo mkdir -p {path}")
+        run(f"sudo tar -xzvf /tmp/{archive_name} -C {path}")
+        run(f"sudo rm /tmp/{archive_name}")
+        run(f"sudo mv {path}/web_static/* {path}")
+        run(f"sudo rm -rf {path}web_static")
+        run("sudo rm -rf /data/web_static/current")
 
-    # Create new symbolic link
-    new_symlink = run(f"sudo ln -s {path} /data/web_static/current")
-
-    if (upload.succeeded and uncompress.succeeded and
-            archive_deletion.succeeded and
-            symlink_deletion.succeeded and new_symlink.succeeded):
+        # Create new symbolic link
+        run(f"sudo ln -s {path} /data/web_static/current")
         print("New version deployed!")
         return True
-    else:
+    except Exception:
         return False
