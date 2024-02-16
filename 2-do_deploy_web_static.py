@@ -22,10 +22,10 @@ def do_deploy(archive_path):
 
     run(f"sudo mkdir -p {path}")
     uncompress = run(f"sudo tar -xzvf /tmp/{archive_name} -C {path}")
-    archive_deletion = run(f"sudo rm -rf /tmp/{archive_name}")
+    archive_deletion = run(f"sudo rm /tmp/{archive_name}")
     run(f"sudo mv {path}/web_static/* {path}")
     run(f"sudo rm -rf {path}/web_static")
-    symlink_deletion = run("sudo rm /data/web_static/current")
+    symlink_deletion = run("sudo rm -rf /data/web_static/current")
 
     # Create new symbolic link
     new_symlink = run(f"sudo ln -s {path} /data/web_static/current")
