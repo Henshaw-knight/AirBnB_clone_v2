@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 # Fabric script that distributes an archive to the web_servers using do_deploy
-from fabric.api import env, run, put
+from fabric.api import env, run, put, local
+from datetime import datetime
 import os
 
 
