@@ -19,8 +19,8 @@ def do_pack():
     local(f"tar -czvf versions/{archive_name} web_static/")
 
     # check if the archive file was created
-    if os.path.exists(archive_name):
-        archive_path = os.path.abspath(archive_name)
+    archive_path = f"versions/{archive_name}"
+    if os.path.exists(archive_path):
         return archive_path
     else:
         return None
