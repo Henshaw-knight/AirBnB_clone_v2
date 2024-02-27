@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 
 @app.teardown_appcontext
-def close_session(err=None):
+def end_session(err=None):
     """Removes the current SQLAlchemy Session after each request"""
     storage.close()
 
