@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 
 @app.teardown_appcontext
-def close_session(error):
+def close_session(err=None):
     """Removes the current SQLAlchemy Session after each request"""
     storage.close()
 
@@ -19,7 +19,7 @@ def close_session(error):
 @app.route("/states_list", strict_slashes=False)
 def states_list():
     """Helps list all State objects"""
-    states = storage.all(State)
+    states = storage.all(State).values()
     return render_template('7-states_list.html', states=states)
 
 
