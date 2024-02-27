@@ -19,7 +19,7 @@ def close_session(error):
 @app.route("/states_list", strict_slashes=False)
 def states_list():
     """Helps list all State objects"""
-    states = storage.all(State).values()
+    states = storage.all(State)
     return render_template('7-states_list.html', states=states)
 
 
