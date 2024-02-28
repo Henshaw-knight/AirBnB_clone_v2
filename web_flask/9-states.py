@@ -27,7 +27,10 @@ def states():
 def state_by_id(id=None):
     """Displays State object found by id"""
     states = storage.all(State)
-    state = states.get('State.{}'.format(id))
+    if states:
+        state = states.get('State.{}'.format(id))
+    else:
+        state = None
     return render_template('9-states.html', state=state)
 
 
