@@ -26,11 +26,8 @@ def states():
 @app.route("/states/<id>", strict_slashes=False)
 def state_by_id(id=None):
     """Displays State object found by id"""
-    state = None
-    states = storage.all(State).values()
-    for spec_state in states:
-        if spec_state.id == id:
-            state = spec_state
+    states = storage.all(State)
+    state = states.get('State.{}'.format(id))
     return render_template('9-states.html', state=state)
 
 
